@@ -19,13 +19,13 @@ fn main() -> std::io::Result<()> {
     // singular, plural, gender. casing (nominative, accusative, dative) "noun Apfel Apfel m/f/n";
     #[derive(Debug)]
     pub struct Noun{
-        s: String,
-        p: String,
-        g: String // or takes def+indef articles (der, ein. das, ein. eine, die. and die for plural)
+        singular: String,
+        plural: String,
+        gender: String // or takes def+indef articles (der, ein. das, ein. eine, die. and die for plural)
     }
     impl Noun {
         fn singular(&self) -> String {
-            return self.s.to_string();
+            return self.singular.to_string();
         }
         
         //fn article(&self) -> String {
@@ -61,13 +61,10 @@ fn main() -> std::io::Result<()> {
     // VERBS p for present, v for value, c...need conjugations eventually...?
     #[derive(Debug)]
     pub struct Verb{
-        p: String, // present vs past?
+        p: String,
+        // present: String, // present vs past?
+        // past_participle: String,
         v: String // value
-    }
-
-    // ?
-    struct Article {
-
     }
 
     struct Word<T> {
@@ -75,9 +72,9 @@ fn main() -> std::io::Result<()> {
         // value, data, next: Word
     }
     impl<T> Word<T> {
-        pub fn new(class: T) -> Self {
-            Word { class }
-        }
+        // pub fn new(class: T) -> Self {
+        //     Word { class }
+        // }
         // pub fn next() -> Self {}
     }
     
@@ -88,15 +85,19 @@ fn main() -> std::io::Result<()> {
     let file_nouns_2 = File::open(nouns)?;
     let file_nouns_reader_1 = BufReader::new(file_nouns_1);
     let file_nouns_reader_2 = BufReader::new(file_nouns_2);
-    let mut noun_count = file_nouns_reader_1.lines().count();
+    let noun_count = file_nouns_reader_1.lines().count();
     let mut noun_line_number = 0;
     let random_noun_number = rand::thread_rng().gen_range(0..=noun_count-1);
-    let mut noun = Noun{s:"".to_string(), p:"".to_string(),g:"".to_string()};
+    let mut noun = Noun{singular:"".to_string(), plural:"".to_string(),gender:"".to_string()};
     for line in file_nouns_reader_2.lines() {
         let line = line?;
+        let part: Vec<&str> = line.trim().split(' ').collect();
+        // for word in line.trim().split(' ') {
+            // println!("{}", word);
+        // }
         if random_noun_number == noun_line_number {
-            noun = Noun{s:line.to_string(), p: line.to_string(), g: line.to_string()};
-        }   
+            noun = Noun{singular:part[0].to_string(), plural: part[1].to_string(), gender:String::from(part[2])};
+        }
         noun_line_number = noun_line_number+1;
     }
 
@@ -107,7 +108,7 @@ fn main() -> std::io::Result<()> {
     let reader = BufReader::new(file);
     let reader2 = BufReader::new(file2);
 
-    let mut verb_count = reader2.lines().count();
+    let verb_count = reader2.lines().count();
     let mut verb_line_number = 0;
     let random_verb_number = rand::thread_rng().gen_range(0..=verb_count-1);
     
@@ -123,15 +124,15 @@ fn main() -> std::io::Result<()> {
 
     // ?
     // noun() or even 'word()' could decide which to apply, and print...?
-    println!("\n {0} {1} {2}\n", pronoun, verb.v, noun.singular());
+    println!("\n {0} present: {1} singular: {2} plural: {3} gender: {4}\n", pronoun, verb.v, noun.singular, noun.plural, noun.gender);
 
     // let word = Word::new(Noun{s:"verkehr".to_string(), p:"verkehr".to_string(), g:"m".to_string()});
-    let word1 = Word::new(noun);
-    println!("word1 is: {:?}", word1.class);
-    let word2 = Word::new(pronoun);
-    println!("word2 is: {:?}", word2.class);
-    let word3 = Word::new(verb);
-    println!("word3 is: {:?}", word3.class);
+    // let word1 = Word::new(noun);
+    // println!("word1 is: {:?}", word1.class);
+    // let word2 = Word::new(pronoun);
+    // println!("word2 is: {:?}", word2.class);
+    // let word3 = Word::new(verb);
+    // println!("word3 is: {:?}", word3.class);
 
     Ok(())
 }

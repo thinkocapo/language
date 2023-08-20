@@ -35,43 +35,40 @@ Cargo provides the command update, which will ignore the Cargo.lock file and fig
 ## Todo
 Aug 11th
 
-verbs.txt past participle for past tense? key for displaying past participle
-nounts.txt plurality
+I.
+nounts.txt plurality and gender
+1. picks singular or plural
+2. gender does nothing yet.
 
+II.
+Print one of these...
 <pronoun> <verb> <artikel><noun> 
+<pronoun> <verb> <def_artikel/indef_article><noun> 
 
-<artikel><noun> <verb>
-<artikel><noun> <verb> <noun>
-<artikel><noun> <verb> <pronoun>
-^ article definite/indefinite is optional.
+<artikel><noun> <verb>  
+<artikel><noun> <verb> <noun>  
+<artikel><noun> <verb> <pronoun>  
 
-definite/indefinite article needs declension if Akk/Dat  
+definite/indefinite article would need declension if Akk/Dat, if trying to do sentence generation.    
+verbs.txt keypress for displaying past participle  
+linked list of words and print it  
 
-linked list of words and print it
-
-LONG-TERM
 noun.def_article.aks
-noun.indef_article.aks
-noun.case1,
+noun.indef_article.aks  
+noun.case1,  
 noun.case2...
-noun.[no article]
-struct/enum Tense has values Present,Past,Future
-verb.Tense or...
-verb.Present (for all pronouns) or...
-verb.Present.ich .du
-verb.Past (for all pronouns)
+noun.[no article]  
+struct/enum Tense has values Present,Past,Future  
+verb.Tense or...  
+verb.Present (for all pronouns) or...  
+verb.Present.ich .du  
+verb.Past (for all pronouns)  
 // only if you want the conjugation done for you, as an option. 'Enter' is test case, no conjugation, 'Spacebar' is answer
 verb. invocation enforcesAkk|Dat or verb.case for the connecting noun .connectVerification in linked list
 
-TODO dummy Test. benchmark it too.
-TODO different modules enum:: word:: verb:: pronoun:: in different files?
-TODO match my stored vocab '<word> <type> <endings?>' against .dict or Text you pass to it
-
-random generating a Adj, choose it's right casing by selecting a noun, which has a casing (due to the verb?).
-'<Adj><Noun>'
-enforce a Pronoun Verb Adj-Noun order? decide the noun direct-object first (and have it re-arrange the adj later) or the adjective first?
-
-LinkedList. Graph, with combinations?
+dummy Test. benchmark it too.  
+different modules enum:: word:: verb:: pronoun:: in different files?  
+match my stored vocab '<word> <type> <endings?>' against .dict or Text you pass to it  
 
 ## Packages > Crates > Modules > Paths
 

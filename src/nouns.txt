@@ -1,22 +1,23 @@
-cousin
-neffe
-michte
-onkel
-tante
-schwieger
-geschichte
-jugendliche
-puppe
-sache
-gepack
-koffer
-fahrrad
-ferien
-anfangenende
-mannschaft
-pfeffer
-punkt
-satz
-schluss
-studium
-zigarette
+cousin cousine cousine cousinen
+neffe neffe m
+michte michten m
+onkel onkeln m
+erfahrung erfahrungen m
+tante tanten f
+schwieger schwiegern m
+geschichte geschichten m
+jugendliche jugendlichen m
+puppe puppen m
+sache sachen n
+gepack gepAck f
+koffer koffern m
+fahrrad fahrraden m
+ferien ferien m
+anfangenende anfangenenden m
+mannschaft mAnnschaft m
+pfeffer pfeffern m
+punkt punkte m
+satz sAtzm f
+schluss schlussel m
+studium studium m
+zigarette zigaretten m
