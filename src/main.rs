@@ -24,9 +24,14 @@ fn main() -> std::io::Result<()> {
         gender: String // or takes def+indef articles (der, ein. das, ein. eine, die. and die for plural)
     }
     impl Noun {
-        // fn singular(&self) -> String {
-        //     return self.singular.to_string();
-        // }
+        fn quantity(&self) -> String {
+            let num = 1;
+            if num%2==0 {
+                return self.singular.to_string();
+            } else {
+                return self.plural.to_string();
+            }
+        }
         
         //fn article(&self) -> String {
             // if g == 'm' then "der" or "ein" [or none] + self.s.to_string();
@@ -63,6 +68,17 @@ fn main() -> std::io::Result<()> {
     pub struct Verb{
         present: String,
         past: String
+    }
+
+    impl Verb {
+        fn tense(&self) -> String {
+            let random = rand::thread_rng().gen_range(0..=1);
+            if random%2==0 {
+                return self.present.to_string();
+            } else {
+                return self.past.to_string();
+            }
+        }
     }
 
     // struct Word<T> {
@@ -123,6 +139,7 @@ fn main() -> std::io::Result<()> {
 
     // noun() or even 'word()' could decide which to apply, and print...?
     println!("\n pronoun {0} present: {1} past: {2} singular: {3} plural: {4} gender: {5}\n", pronoun, verb.present, verb.past, noun.singular, noun.plural, noun.gender);
+    println!("\n pronoun {0} verb: {1} noun: {2}\n", pronoun, verb.tense(), noun.quantity());
 
     // let word = Word::new(Noun{s:"verkehr".to_string(), p:"verkehr".to_string(), g:"m".to_string()});
     // let word1 = Word::new(noun);
