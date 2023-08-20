@@ -89,3 +89,21 @@ impl<T> AnyExt for T {
         Pronoun::Sie(value) => pronoun = value,
         _ => println!("Something else"),
     };
+
+
+
+// struct Word<T> {
+//     class : T
+//     // value, data, next: Word
+// }
+// impl<T> Word<T> {
+    // pub fn new(class: T) -> Self {
+    //     Word { class }
+    // }
+    // pub fn next() -> Self {}
+// }
+
+
+// Immutable and no methods needed yet.
+// Maybe struct ones Word is evaluated for matching.
+// pub struct Pronoun;
