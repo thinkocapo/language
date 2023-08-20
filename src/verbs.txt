@@ -1,26 +1,25 @@
 klettern geklettern
-sammeln
+sammeln gesammeln
 streiten gestritten
-ubernachten
+ubernachten geubernachten
 verkaufen verkauft
-zeichnen
+zeichnen gezeichnen
 anfangen geanfangen
 ankommen angekommen
 hangen gehangen
 aufmachen aufgemachen
-aufpassen
-klappen
-legen
+aufpassen geuafpassen
+klappen geklappen
+legen gelegen
 passieren passiert
 rufen gerufen
-wachsen
-setzen
-sitzen
+wachsen gewaschen
+setzen gesetzen
+sitzen gesitzen 
 stellen gestellen
-fleiSig
-bedeuten
-stehen
-vergleichen
-verstecken
+fleiSig gefleiSig
+bedeuten gebedeuten
+stehen gestehen
+vergleichen gevergleichen
+verstecken geverstecken
 warten gewarten
-warten auf

@@ -24,9 +24,9 @@ fn main() -> std::io::Result<()> {
         gender: String // or takes def+indef articles (der, ein. das, ein. eine, die. and die for plural)
     }
     impl Noun {
-        fn singular(&self) -> String {
-            return self.singular.to_string();
-        }
+        // fn singular(&self) -> String {
+        //     return self.singular.to_string();
+        // }
         
         //fn article(&self) -> String {
             // if g == 'm' then "der" or "ein" [or none] + self.s.to_string();
@@ -58,25 +58,23 @@ fn main() -> std::io::Result<()> {
         //}
     }
 
-    // VERBS p for present, v for value, c...need conjugations eventually...?
+    // VERBS
     #[derive(Debug)]
     pub struct Verb{
-        p: String,
-        // present: String, // present vs past?
-        // past_participle: String,
-        v: String // value
+        present: String,
+        past: String
     }
 
-    struct Word<T> {
-        class : T
-        // value, data, next: Word
-    }
-    impl<T> Word<T> {
+    // struct Word<T> {
+    //     class : T
+    //     // value, data, next: Word
+    // }
+    // impl<T> Word<T> {
         // pub fn new(class: T) -> Self {
         //     Word { class }
         // }
         // pub fn next() -> Self {}
-    }
+    // }
     
     
     // NOUNS
@@ -91,12 +89,12 @@ fn main() -> std::io::Result<()> {
     let mut noun = Noun{singular:"".to_string(), plural:"".to_string(),gender:"".to_string()};
     for line in file_nouns_reader_2.lines() {
         let line = line?;
-        let part: Vec<&str> = line.trim().split(' ').collect();
+        let parts: Vec<&str> = line.trim().split(' ').collect();
         // for word in line.trim().split(' ') {
             // println!("{}", word);
         // }
         if random_noun_number == noun_line_number {
-            noun = Noun{singular:part[0].to_string(), plural: part[1].to_string(), gender:String::from(part[2])};
+            noun = Noun{singular:parts[0].to_string(), plural: parts[1].to_string(), gender:String::from(parts[2])};
         }
         noun_line_number = noun_line_number+1;
     }
@@ -112,19 +110,19 @@ fn main() -> std::io::Result<()> {
     let mut verb_line_number = 0;
     let random_verb_number = rand::thread_rng().gen_range(0..=verb_count-1);
     
-    let mut verb = Verb{p:"".to_string(),v:"".to_string()};
+    let mut verb = Verb{present:"".to_string(),past:"".to_string()};
 
     for line in reader.lines() {
         let line = line?;
+        let parts: Vec<&str> = line.trim().split(' ').collect();
         if random_verb_number == verb_line_number {
-            verb = Verb{p: line.to_string(), v: line.to_string()};
+            verb = Verb{present: parts[0].to_string(), past: parts[1].to_string()};
         }   
         verb_line_number = verb_line_number+1;
     }
 
-    // ?
     // noun() or even 'word()' could decide which to apply, and print...?
-    println!("\n {0} present: {1} singular: {2} plural: {3} gender: {4}\n", pronoun, verb.v, noun.singular, noun.plural, noun.gender);
+    println!("\n pronoun {0} present: {1} past: {2} singular: {3} plural: {4} gender: {5}\n", pronoun, verb.present, verb.past, noun.singular, noun.plural, noun.gender);
 
     // let word = Word::new(Noun{s:"verkehr".to_string(), p:"verkehr".to_string(), g:"m".to_string()});
     // let word1 = Word::new(noun);
