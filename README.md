@@ -32,26 +32,17 @@ updating crates
 Cargo provides the command update, which will ignore the Cargo.lock file and figure out all the latest versions that fit your specifications in Cargo.toml. Cargo will then write those versions to the Cargo.lock file. Otherwise, by default, Cargo will only look for versions greater than 0.8.5 and less than 0.9.0.
 ```
 
-## Todo
-Aug 11th
-
-I.
-nounts.txt plurality and gender
-1. picks singular or plural
-2. gender does nothing yet.
-
-II.
-Print one of these...
+## Todo  
+Print one of these...  
 <pronoun> <verb> <artikel><noun> 
 <pronoun> <verb> <def_artikel/indef_article><noun> 
 
-<artikel><noun> <verb>  
-<artikel><noun> <verb> <noun>  
+Or print noun first, followed by pronoun  
 <artikel><noun> <verb> <pronoun>  
-
-definite/indefinite article would need declension if Akk/Dat, if trying to do sentence generation.    
-verbs.txt keypress for displaying past participle  
-linked list of words and print it  
+<artikel><noun> <verb> <noun>  
+         <noun> <verb> <pronoun>  
+^ Nominative noun  
+<artikel_possessive>
 
 noun.def_article.aks
 noun.indef_article.aks  
@@ -61,7 +52,7 @@ noun.[no article]
 struct/enum Tense has values Present,Past,Future  
 verb.Tense or...  
 verb.Present (for all pronouns) or...  
-verb.Present.ich .du  
+verb.Present.ich.du  
 verb.Past (for all pronouns)  
 // only if you want the conjugation done for you, as an option. 'Enter' is test case, no conjugation, 'Spacebar' is answer
 verb. invocation enforcesAkk|Dat or verb.case for the connecting noun .connectVerification in linked list
