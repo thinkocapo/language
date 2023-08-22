@@ -18,18 +18,10 @@ use std::path::Path;
 // how to make noun() word() itself execute as a function without calling noun.method() - Constructor method? but on an instance?
 fn main() -> std::io::Result<()> {
 
-    let pronouns = ["Ich", "Du", "Er Es Sie", "Wir", "Ihr", "Sie"];
-    let random = rand::thread_rng().gen_range(0..=pronouns.len()-1);
-    let mut pronoun = pronouns[random];
-    if pronoun == "Er Es Sie" {
-        let random_pronoun = rand::thread_rng().gen_range(0..=2);
-        let er_sie_es: Vec<&str> = pronoun.split(' ').collect();
-        pronoun = er_sie_es[random_pronoun];
-    }
-
+    let pronoun: String = pick_pronoun();
     let noun: Noun = pick_noun("./src/nouns.txt").unwrap();
     let verb: Verb = pick_verb("./src/verbs.txt").unwrap();
-    
+
     // println!("\n pronoun {0} present: {1} past: {2} singular: {3} plural: {4} gender: {5}\n", pronoun, verb.present, verb.past, noun.singular, noun.plural, noun.gender);
     println!("\n {0} {1} {2}\n", pronoun, verb.tense(), noun.quantity());
 
@@ -67,6 +59,18 @@ fn main() -> std::io::Result<()> {
                 return self.past.to_string();
             }
         }
+    }
+
+    fn pick_pronoun() -> String {
+        let pronouns = ["Ich", "Du", "Er Es Sie", "Wir", "Ihr", "Sie"];
+        let random = rand::thread_rng().gen_range(0..=pronouns.len()-1);
+        let mut pronoun = pronouns[random];
+        if pronoun == "Er Es Sie" {
+            let random_pronoun = rand::thread_rng().gen_range(0..=2);
+            let er_sie_es: Vec<&str> = pronoun.split(' ').collect();
+            pronoun = er_sie_es[random_pronoun];
+        }
+        return pronoun.to_string();
     }
 
     fn pick_noun(file_path: &str) -> Result<Noun, Box<dyn std::error::Error>> {
