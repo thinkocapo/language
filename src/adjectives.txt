@@ -4,3 +4,7 @@ kompliziert
 geschlossen
 zuerst
 zum Schluss
+dunkel
+hell
+schwer
+vorsichtig

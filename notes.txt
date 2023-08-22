@@ -107,3 +107,38 @@ impl<T> AnyExt for T {
 // Immutable and no methods needed yet.
 // Maybe struct ones Word is evaluated for matching.
 // pub struct Pronoun;
+
+
+
+anfangenende anfangenenden m
+schwiegermutter schwiegermUtter...
+schwiegerfater schwiegerfater...
+
+fleiSig gefleiSig
+
+
+mehr als - more thread_rng
+
+I like not having the answer in-program, forces you to take a brief pause, breadth, not overstimulate. Pay the price for not knowing it. Just look it up, learn it.
+
+noun() or even 'word()' could decide which to apply, and print...?
+
+
+struct Word<T> {
+        class : T
+        // value, data, next: Word
+    }
+    impl<T> Word<T> {
+        pub fn new(class: T) -> Self {
+            Word { class }
+        }
+        pub fn next() -> Self {}
+    }
+    
+    let word = Word::new(Noun{s:"verkehr".to_string(), p:"verkehr".to_string(), g:"m".to_string()});
+    let word1 = Word::new(noun);
+    println!("word1 is: {:?}", word1.class);
+    let word2 = Word::new(pronoun);
+    println!("word2 is: {:?}", word2.class);
+    let word3 = Word::new(verb);
+    println!("word3 is: {:?}", word3.class);
