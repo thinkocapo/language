@@ -3,23 +3,16 @@ use std::fs::File;
 use std::io::{BufReader, BufRead};
 use std::path::Path;
 
-/*
-<pronoun> <verb> <artikel><noun> 
-<pronoun> <verb> <def_artikel/indef_article><noun> 
-
-<artikel><noun> <verb> <pronoun>  
-<artikel><noun> <verb> <noun>  
-         <noun> <verb> <pronoun>  
-
-*/
-
 fn main() -> std::io::Result<()> {
 
+    // TODO constants/struct enumeration, function 
     let pronoun: String = pick_pronoun();
     let noun: Noun = pick_noun("./src/nouns.txt").unwrap();
     let verb: Verb = pick_verb("./src/verbs.txt").unwrap();
 
-    println!("\n {0} {1} {2}\n", pronoun, verb.tense(), noun.quantity());
+    println!("\n------------------------");
+    println!("\n {0} {1} {2} ({3}) \n", pronoun, verb.tense(), noun.quantity(), noun.gender);
+    println!("------------------------");
     
     pub struct Noun{
         singular: String,
@@ -37,7 +30,6 @@ fn main() -> std::io::Result<()> {
             }
         }
     }
-    // println!("\n pronoun {0} present: {1} past: {2} singular: {3} plural: {4} gender: {5}\n", pronoun, verb.present, verb.past, noun.singular, noun.plural, noun.gender);
     
     #[derive(Debug)]
     pub struct Verb{

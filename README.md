@@ -1,6 +1,33 @@
+# Overview
+This is a tool for learning any foreign language. It's tested for A1/A2 level language.  
+It’s a command-line script that generates random word combinations that you need to connect and speak in grammatically correct sentences.  
+I chose Rust because it’s a new programming language I wanted to try.  
+https://github.com/thinkocapo/language  
+
 ## Run
-```cargo run```
-## How
+1. ```cargo run```
+2. Conjugate the verb with the given pronoun
+2. And add an article, possessive pronoun or preposition
+4. Speak it all together as one sentence
+
+Examples...
+
+
+## Todo  
+Print different combos of these. Construct it into a linkedList and enforce syntax (e.g. only noun can come after a verb)
+```
+<pronoun> <verb> <artikel><noun>  
+<pronoun> <verb> <def_artikel/indef_article><noun>  
+<pronoun> <verb> <def_artikel/indef_article><noun>  
+<artikel><noun> <verb> <pronoun>  
+<artikel><noun> <verb> <noun>  
+         <noun> <verb> <pronoun>    
+      <pronoun> <verb> <pronoun>  
+```
+
+Mode for displaying the noun's gender in parenthesis
+
+## Working with Rust & Cargo
 ```
  ~/thinkocapo/german   rustc main.rs
  ~/thinkocapo/german   ls
@@ -31,35 +58,6 @@ updating crates
 ```
 Cargo provides the command update, which will ignore the Cargo.lock file and figure out all the latest versions that fit your specifications in Cargo.toml. Cargo will then write those versions to the Cargo.lock file. Otherwise, by default, Cargo will only look for versions greater than 0.8.5 and less than 0.9.0.
 ```
-
-## Todo  
-Print one of these...  
-<pronoun> <verb> <artikel><noun> 
-<pronoun> <verb> <def_artikel/indef_article><noun> 
-
-Or print noun first, followed by pronoun  
-<artikel><noun> <verb> <pronoun>  
-<artikel><noun> <verb> <noun>  
-         <noun> <verb> <pronoun>  
-^ Nominative noun  
-<artikel_possessive>
-
-noun.def_article.aks
-noun.indef_article.aks  
-noun.case1,  
-noun.case2...
-noun.[no article]  
-struct/enum Tense has values Present,Past,Future  
-verb.Tense or...  
-verb.Present (for all pronouns) or...  
-verb.Present.ich.du  
-verb.Past (for all pronouns)  
-// only if you want the conjugation done for you, as an option. 'Enter' is test case, no conjugation, 'Spacebar' is answer
-verb. invocation enforcesAkk|Dat or verb.case for the connecting noun .connectVerification in linked list
-
-dummy Test. benchmark it too.  
-different modules enum:: word:: verb:: pronoun:: in different files?  
-match my stored vocab '<word> <type> <endings?>' against .dict or Text you pass to it  
 
 ## Packages > Crates > Modules > Paths
 
