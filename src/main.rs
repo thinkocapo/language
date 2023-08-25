@@ -3,36 +3,30 @@ use std::fs::File;
 use std::io::{BufReader, BufRead};
 use std::path::Path;
 
-// TODO
-// copy/ownership of who is using line reader, access to it.
+/*
+<pronoun> <verb> <artikel><noun> 
+<pronoun> <verb> <def_artikel/indef_article><noun> 
 
-// needs Akk/Dat if used as direct/indirect object, verb may need to specify that
-    // sentence/word connects verb to noun, verb has akk/dat property or preference,
-    // noun.call() checks reference to its noun for preferred property type? no.
-    // or just print 'def' or 'indef'. could have also done print 'sing plural' and then you have to decide how noun written. Nah
-// Start presentation, or explaining
+<artikel><noun> <verb> <pronoun>  
+<artikel><noun> <verb> <noun>  
+         <noun> <verb> <pronoun>  
 
-// TODO modularize er es sie picker
-// TODO warnings for derive(Debug) 
-// calling to_string()
-// how to make noun() word() itself execute as a function without calling noun.method() - Constructor method? but on an instance?
+*/
+
 fn main() -> std::io::Result<()> {
 
     let pronoun: String = pick_pronoun();
     let noun: Noun = pick_noun("./src/nouns.txt").unwrap();
     let verb: Verb = pick_verb("./src/verbs.txt").unwrap();
 
-    // println!("\n pronoun {0} present: {1} past: {2} singular: {3} plural: {4} gender: {5}\n", pronoun, verb.present, verb.past, noun.singular, noun.plural, noun.gender);
     println!("\n {0} {1} {2}\n", pronoun, verb.tense(), noun.quantity());
-
     
-    #[derive(Debug)]
     pub struct Noun{
         singular: String,
         plural: String,
         gender: String
     }
-
+    
     impl Noun {
         fn quantity(&self) -> String {
             let random = rand::thread_rng().gen_range(0..=1);
@@ -43,7 +37,8 @@ fn main() -> std::io::Result<()> {
             }
         }
     }
-
+    // println!("\n pronoun {0} present: {1} past: {2} singular: {3} plural: {4} gender: {5}\n", pronoun, verb.present, verb.past, noun.singular, noun.plural, noun.gender);
+    
     #[derive(Debug)]
     pub struct Verb{
         present: String,
@@ -97,7 +92,7 @@ fn main() -> std::io::Result<()> {
             }
             noun_line_number = noun_line_number+1;
         }
-
+        // noun.gender;
         Ok(noun)
     }
 
