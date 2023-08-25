@@ -6,12 +6,28 @@ https://github.com/thinkocapo/language
 
 ## Run
 1. ```cargo run```
-2. Conjugate the verb with the given pronoun
-2. And add an article, possessive pronoun or preposition
-4. Speak it all together as one sentence
+2. Read the output
+3. Figure out how to conjugate the verb with the given pronoun
+4. Figure out how to use a article, preposition or possessive pronoun in the right Casing/Declension given the verb+noun.
+5. Speak it all together as one sentence. See examples below:
 
-Examples...
+If it prints, "We clap nieces"
+> Wir klappen Nichten  
 
+How about, "We clap FOR OUR nieces"
+> Wir klappen fur unsure Nichten.  
+
+If it prints, "You all open keys"
+> Ihr aufmachen Schlüssel
+
+How about, "You all open IT WITH THE keys"
+> Ihr macht ES MIT DEN Schlüssel
+
+If it prints, "I argued Uncle"
+> Ich gestritten Onkel
+
+How about, "I argued WITH YOUR uncle"
+> Ich habe mit deinem Onkel gestritten
 
 ## Todo  
 Print different combos of these. Construct it into a linkedList and enforce syntax (e.g. only noun can come after a verb)
