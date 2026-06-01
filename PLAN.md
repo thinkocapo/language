@@ -52,6 +52,11 @@ see how 'indefinite' it should be a tag label displayed above the noun, so that 
 
 "give me a plan"
 
+## Upcoming Features
+
+- Click on any word to regenerate just that word with a new random one
+- "Add Preposition" button that inserts a preposition before the noun
+
 ## Architecture (deciding)
 
 - Plain HTML page — unclear where all vocab would be stored (in-memory?)
