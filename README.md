@@ -1,90 +1,45 @@
-# Overview
-This is a tool for learning any foreign language. It's tested for A1/A2 level language.  
-It’s a command-line script that generates random word combinations that you need to connect and speak in grammatically correct sentences.  
-I chose Rust because it’s a new programming language I wanted to try.  
-https://github.com/thinkocapo/language  
+# German Practice
 
-## Run
-1. ```cargo run```
-2. Read the output
-3. Figure out how to conjugate the verb with the given pronoun
-4. Figure out how to use a article, preposition or possessive pronoun in the right Casing/Declension given the verb+noun.
-5. Speak it all together as one sentence. See examples below:
+![German Practice](germanpractice.png)
 
-If it prints, "We clap nieces"
-> Wir klappen Nichten  
+A single-page German sentence drill. No framework, no build step — open `index.html` in a browser and go.
 
-How about, "We clap FOR OUR nieces"
-> Wir klappen fur unsure Nichten.  
+## What it does
 
-If it prints, "You all open keys"
-> Ihr aufmachen Schlüssel
+Generates 10 random German sentences using A1/A2 vocabulary. Each sentence shows:
 
-How about, "You all open IT WITH THE keys"
-> Ihr macht ES MIT DEN Schlüssel
+- **Pronoun** — random subject (ich, du, er, sie…)
+- **Verb** — infinitive form, with a label above it indicating the tense to use (present, präterite, perfekt, futur)
+- **Object** — a noun with a label indicating whether the article should be definite, indefinite, or omitted — *you* figure out the correct form (der/die/das, den/dem, ein/eine…)
+- **Object pronoun** — some sentences include a second pronoun (mich, dich, ihn…)
 
-If it prints, "I argued Uncle"
-> Ich gestritten Onkel
+Your job: speak the sentence out loud, grammatically correct. Click **ANSWER** to reveal the correct answer and compare.
 
-How about, "I argued WITH YOUR uncle"
-> Ich habe mit deinem Onkel gestritten
-
-## Todo  
-Print different combos of these. Construct it into a linkedList and enforce syntax (e.g. only noun can come after a verb)
-```
-<pronoun> <verb> <artikel><noun>  
-<pronoun> <verb> <def_artikel/indef_article><noun>  
-<pronoun> <verb> <def_artikel/indef_article><noun>  
-<artikel><noun> <verb> <pronoun>  
-<artikel><noun> <verb> <noun>  
-         <noun> <verb> <pronoun>    
-      <pronoun> <verb> <pronoun>  
-```
-
-Mode for displaying the noun's gender in parenthesis
-
-## Working with Rust & Cargo
-```
- ~/thinkocapo/german   rustc main.rs
- ~/thinkocapo/german   ls
-main    main.rs
- ~/thinkocapo/german   ./main
+## Sentence patterns
 
 ```
-
-```
-rustup doc
-rustup docs --book
-```
-
-```
-cargo check
-#
-cargo build
-./target/debug/language
-# or
-cargo run
-
-#
-cargo build --release
-./target/release/language
+pronoun | verb_infinitive | noun             (1/3 of sentences)
+pronoun | verb_infinitive | object pronoun   (1/3 of sentences)
+pronoun | verb_infinitive | noun | pronoun   (1/3 of sentences)
 ```
 
-updating crates  
+Article type (definite / indefinite / none) is randomized per sentence.
+
+## Running locally
+
+Open directly in the browser:
 ```
-Cargo provides the command update, which will ignore the Cargo.lock file and figure out all the latest versions that fit your specifications in Cargo.toml. Cargo will then write those versions to the Cargo.lock file. Otherwise, by default, Cargo will only look for versions greater than 0.8.5 and less than 0.9.0.
+open index.html
 ```
 
-## Packages > Crates > Modules > Paths
+For hot reload while editing, use [browser-sync](https://browsersync.io/):
+```bash
+npx browser-sync start --server --files "index.html"
+```
 
-Packages: A Cargo feature that lets you build, test, and share crates  (Cargo.toml)
-Crates: A tree of modules that produces a library or executable  (m)
-Modules and use: Let you control the organization, scope, and privacy of paths  
-Paths: A way of naming an item, such as a struct, function, or module  
+Or install the **Live Server** extension in VS Code, right-click `index.html` → *Open with Live Server*.
 
-Cargo follows a convention that src/main.rs is the crate root of a binary crate with the same name as the package. Likewise, Cargo knows that if the package directory contains src/lib.rs, the package contains a library crate with the same name as the package, and src/lib.rs is its crate root. Cargo passes the crate root files to rustc to build the library or binary.
+## Stack
 
-## Error Handling
-Rust groups errors into two major categories: recoverable and unrecoverable errors. For a recoverable error, such as a file not found error, we most likely just want to report the problem to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, like trying to access a location beyond the end of an array, and so we want to immediately stop the program.
-
-Rust doesn’t have exceptions. Instead, it has the type Result<T, E> for recoverable errors and the panic! macro that stops execution when the program encounters an unrecoverable error.
+Plain HTML + vanilla JS. Vocab is hardcoded in JS arrays in `index.html`.
+Future: FastAPI backend to serve vocab from a database, hosted as a page on personal site.
