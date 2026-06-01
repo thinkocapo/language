@@ -1,5 +1,7 @@
 # German Practice
 
+![German Practice](germanpractice.png)
+
 A single-page German sentence drill. No framework, no build step — open `index.html` in a browser and go.
 
 ## What it does
