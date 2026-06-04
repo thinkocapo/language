@@ -61,7 +61,7 @@
     }
 
     .conn {
-      font-size: 0.8rem;
+      font-size: 1rem;
       padding: 3px 8px;
       border-radius: 3px;
       background: #1c1c1c;
@@ -432,6 +432,13 @@ function articleType() {
   return 'none';
 }
 
+// Show all three forms for the chosen article type; the reader picks the
+// one that fits the noun's gender.
+const ARTICLE_FORMS = {
+  definite:   ['der', 'das', 'die'],
+  indefinite: ['ein', 'ein', 'eine'],
+};
+
 function sentencePattern() {
   const r = Math.random();
   if (r < 1/3) return 'P-V-N';          // pronoun verb noun
@@ -465,13 +472,16 @@ function buildCard(i) {
   const art      = articleType();
   const pattern  = sentencePattern();
 
+  const hasNoun = pattern === 'P-V-N' || pattern === 'P-V-N-OP';
+
   let parts = '';
   parts += token('pronoun', pronoun.de, 'pronoun');
   parts += token(tense, verb.inf, 'verb', 'tense', 'verb');
 
-  if (pattern === 'P-V-N' || pattern === 'P-V-N-OP') {
+  if (hasNoun) {
     if (art !== 'none') {
-      parts += token(art, '___', 'noun', 'article');
+      const stacked = ARTICLE_FORMS[art].join('<br>');
+      parts += token(art, stacked, 'noun', 'article');
     }
     parts += token('noun', noun.de, 'noun', '', 'noun');
   }
