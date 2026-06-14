@@ -176,13 +176,19 @@
     }
 
     .connector-badge {
-      text-align: right;
+      justify-self: end;
+      width: fit-content;
       font-size: 1rem;
       font-style: italic;
       color: #7a9fbf;
       letter-spacing: 0.04em;
       opacity: 0.85;
+      cursor: pointer;
+      border-bottom: 1px dashed currentColor;
+      transition: opacity 0.12s ease;
     }
+
+    .connector-badge:hover { opacity: 0.65; }
 
     .connector-badge.cat-sub { color: #d6a99f; }
     .connector-badge.cat-adv { color: #7a9fbf; }
@@ -342,9 +348,17 @@ const PRONOUNS = [
   { de: 'wir' }, { de: 'ihr' }, { de: 'sie' }, { de: 'Sie' }
 ];
 
-// Accusative object pronouns (mich, dich, ihn, etc.)
+// Personal pronouns as objects — pick accusative or dative per row
 const OBJ_PRONOUNS = [
-  'mich', 'dich', 'ihn', 'sie', 'es', 'uns', 'euch', 'sie', 'Sie'
+  { acc: 'mich',  dat: 'mir'    },
+  { acc: 'dich',  dat: 'dir'    },
+  { acc: 'ihn',   dat: 'ihm'    },
+  { acc: 'sie',   dat: 'ihr'    },
+  { acc: 'es',    dat: 'ihm'    },
+  { acc: 'uns',   dat: 'uns'    },
+  { acc: 'euch',  dat: 'euch'   },
+  { acc: 'sie',   dat: 'ihnen'  },
+  { acc: 'Sie',   dat: 'Ihnen'  },
 ];
 
 const VERBS = [
@@ -436,15 +450,14 @@ const CONNECTORS = [
   { word: 'außerdem',cat: 'cat-adv' },
 ];
 
+let connectorIdx = Math.floor(Math.random() * CONNECTORS.length);
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
 function articleType() {
-  const r = Math.random();
-  if (r < 1/3) return 'definite';
-  if (r < 2/3) return 'indefinite';
-  return 'none';
+  return Math.random() < 0.5 ? 'definite' : 'indefinite';
 }
 
 // Show all three forms for the chosen article type; the reader picks the
@@ -454,11 +467,13 @@ const ARTICLE_FORMS = {
   indefinite: ['ein', 'ein', 'eine'],
 };
 
-function sentencePattern() {
-  const r = Math.random();
-  if (r < 1/3) return 'P-V-N';          // pronoun verb noun
-  if (r < 2/3) return 'P-V-OP';         // pronoun verb obj-pronoun
-  return 'P-V-N-OP';                     // pronoun verb noun obj-pronoun
+function pickObjPronoun() {
+  const pair = pick(OBJ_PRONOUNS);
+  const accusative = Math.random() < 0.5;
+  return {
+    word: accusative ? pair.acc : pair.dat,
+    label: accusative ? 'Accusative' : 'Dative',
+  };
 }
 
 // ── Render ────────────────────────────────────────────────────────────────────
@@ -495,38 +510,42 @@ function toggleArticle(labelEl) {
   wordEl.innerHTML = ARTICLE_FORMS[next].join('<br>');
 }
 
+function currentConnector() {
+  return CONNECTORS[connectorIdx];
+}
+
+function connectorBadge() {
+  const conn = currentConnector();
+  return `<div class="connector-badge ${conn.cat}" onclick="cycleConnector()" title="click for next connector">${conn.word}</div>`;
+}
+
+function cycleConnector() {
+  connectorIdx = (connectorIdx + 1) % CONNECTORS.length;
+  const conn = currentConnector();
+  document.querySelectorAll('.connector-badge').forEach(el => {
+    el.textContent = conn.word;
+    el.className = `connector-badge ${conn.cat}`;
+  });
+}
+
 function buildCard(i) {
   const pronoun  = pick(PRONOUNS);
   const verb     = pick(VERBS);
   const noun     = pick(NOUNS);
-  const objPron  = pick(OBJ_PRONOUNS);
   const tense    = pick(TENSES);
   const art      = articleType();
-  const pattern  = sentencePattern();
-
-  const hasNoun = pattern === 'P-V-N' || pattern === 'P-V-N-OP';
+  const objPron  = pickObjPronoun();
 
   let parts = '';
   parts += token('pronoun', pronoun.de, 'pronoun');
   parts += token(tense, verb.inf, 'verb', 'tense', 'verb');
-
-  if (hasNoun) {
-    if (art !== 'none') {
-      const stacked = ARTICLE_FORMS[art].join('<br>');
-      parts += articleToken(art, stacked);
-    }
-    parts += token('noun', noun.de, 'noun', '', 'noun');
-  }
-
-  if (pattern === 'P-V-OP' || pattern === 'P-V-N-OP') {
-    parts += token('obj. pronoun', objPron, 'obj-pronoun');
-  }
-
-  const conn = pick(CONNECTORS);
+  parts += articleToken(art, ARTICLE_FORMS[art].join('<br>'));
+  parts += token('noun', noun.de, 'noun', '', 'noun');
+  parts += token(objPron.label, objPron.word, 'obj-pronoun');
 
   return `
     <div class="sentence-row">
-      <div class="connector-badge ${conn.cat}">${conn.word}</div>
+      ${connectorBadge()}
       <div class="card" id="card-${i}">
         <div class="sentence-parts">${parts}</div>
         <button class="answer-btn" onclick="toggleAnswer(${i})">ANSWER</button>
